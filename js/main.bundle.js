@@ -1,13 +1,12 @@
 (() => {
   // src/components/Serculos.js
   var T = 1018;
-  var ww = window.innerWidth;
-  var wh = window.innerHeight;
-  var SIZE = wh / 3 - 10;
-  if (ww < wh) {
-    SIZE = ww / 3 - 10;
-  }
   function Serculos(apdiv2, json) {
+    let ww = window.innerWidth, wh = window.innerHeight;
+    let SIZE = wh / 3 - 10;
+    if (ww < wh) {
+      SIZE = ww / 3 - 10;
+    }
     let sto, ended = false;
     apdiv2.style.width = `${SIZE}px`;
     apdiv2.style.height = `${SIZE}px`;
@@ -138,13 +137,13 @@
   var W;
   window.addEventListener("DOMContentLoaded", (event) => {
     serculos = document.querySelector(".serculos");
-    let ww2 = window.innerWidth;
-    W = ww2;
+    let ww = window.innerWidth;
+    W = ww;
     let hh = window.innerHeight;
     H = hh;
-    if (ww2 < hh) {
-      serculos.style.width = ww2 + "px";
-      serculos.style.margin = ` ${(hh - ww2) / 2}px 0`;
+    if (ww < hh) {
+      serculos.style.width = ww + "px";
+      serculos.style.margin = ` ${(hh - ww) / 2}px 0`;
     } else {
       serculos.style.width = hh + "px";
       serculos.style.margin = "0 auto";
@@ -152,11 +151,11 @@
     init();
   });
   window.addEventListener("resize", (event) => {
-    let ww2 = window.innerWidth;
+    let ww = window.innerWidth;
     let hh = window.innerHeight;
-    if (ww2 == W)
+    if (ww == W)
       return;
-    W = ww2;
+    W = ww;
     H = hh;
     reiniciar();
   });
