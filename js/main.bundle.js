@@ -1,7 +1,8 @@
 (() => {
   // src/components/Serculos.js
   var T = 618;
-  var [ww, wh] = [window.innerWidth, window.innerHeight];
+  var ww = window.innerWidth;
+  var wh = window.innerHeight;
   var SIZE = wh / 3 - 10;
   if (ww < wh) {
     SIZE = ww / 3 - 10;
@@ -117,8 +118,13 @@
     serculos = document.querySelector(".serculos");
     let ww2 = window.innerWidth;
     let hh = window.innerHeight;
-    serculos.style.width = hh + "px";
-    serculos.style.margin = "0 auto";
+    if (ww2 < hh) {
+      serculos.style.width = ww2 + "px";
+      serculos.style.margin = ` ${(hh - ww2) / 2}px 0`;
+    } else {
+      serculos.style.width = hh + "px";
+      serculos.style.margin = "0 auto";
+    }
     init();
   });
   function init() {
