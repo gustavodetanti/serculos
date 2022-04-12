@@ -42,7 +42,10 @@
           a += 5;
           if (a >= 360)
             a -= 360;
-          sto = setTimeout(next, T * (1 + rand(10) / 5));
+          if (rand(100 < 4)) {
+            sto = setTimeout(next, T * 4 * (1 + rand(10) / 5));
+          } else
+            sto = setTimeout(next, T * (1 + rand(10) / 5));
         }, 100);
       };
       apdiv2.appendChild(IMtop);
