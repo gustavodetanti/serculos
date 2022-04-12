@@ -42,8 +42,9 @@
           a += 5;
           if (a >= 360)
             a -= 360;
-          if (rand(100 < 4)) {
-            sto = setTimeout(next, T * 4 * (1 + rand(10) / 5));
+          if (rand(100) < 5) {
+            console.warn("stop");
+            sto = setTimeout(next, T * 5 * (1 + rand(10) / 5));
           } else
             sto = setTimeout(next, T * (1 + rand(10) / 5));
         }, 100);
@@ -55,7 +56,11 @@
       if (ended)
         return;
       [...apdiv2.querySelectorAll(".toRemove")].forEach((tr) => {
-        tr.parentNode.removeChild(tr);
+        try {
+          tr.parentNode.removeChild(tr);
+        } catch (e) {
+        }
+        ;
       });
       r += dir;
       if (rand(4) < 1)
@@ -154,20 +159,24 @@
     H = hh;
     reiniciar();
   });
+  var dsto;
   function reiniciar() {
-    objs.forEach((o) => {
-      o.end();
-      serculos.removeChild(o.div);
-    });
-    objs = [];
-    if (W < H) {
-      serculos.style.width = W + "px";
-      serculos.style.margin = ` ${(H - W) / 2}px 0`;
-    } else {
-      serculos.style.width = H + "px";
-      serculos.style.margin = "0 auto";
-    }
-    init();
+    clearTimeout(dsto);
+    dsto = setTimeout(() => {
+      objs.forEach((o) => {
+        o.end();
+        serculos.removeChild(o.div);
+      });
+      objs = [];
+      if (W < H) {
+        serculos.style.width = W + "px";
+        serculos.style.margin = ` ${(H - W) / 2}px 0`;
+      } else {
+        serculos.style.width = H + "px";
+        serculos.style.margin = "0 auto";
+      }
+      init();
+    }, 100);
   }
   function init() {
     for (let i = 0; i < 9; i++) {
