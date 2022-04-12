@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' />
+
+  <link rel='stylesheet' href='css/main.css'>
+  <title>Document</title>
+  <style>
+  .serculos{
+    margin:0 auto;
+  font-size:0;  
+  }
+
+    .js-app {
+      display: inline-block;
+      position: relative;
+      width: 400px;
+      height:400px;
+      margin: auto auto;
+overflow: hidden;
+
+    }
+
+    .js-app .Mimg {
+      margin: 0px;
+      position: absolute;
+      object-fit: cover;
+     /* opacity: 0;*/
+      transition: opacity 3s;
+      width: 400px;
+      border-radius: 50%;
+      transform: scale(1.5, 1.5);
+
+    }
+    .js-app >img{
+ width:400px;
+height:400px;
+position:absolute;
+top:0;left:0;
+transition: opacity 3s ease;
+border-radius: 50%;
+ box-shadow:  27px 27px 55px #b5b5b5,
+             -27px -27px 55px #ffffff;
+             clip-path: url(#clipping-path-1);
+    }
+    .js-app img.hidden{
+      opacity: 0;
+
+
+    }
+ 
+  
+
+
+  </style>
+</head>
+
+<body>
+ 
+<svg height="0">
+  <clipPath id="clipping-path-1" clipPathUnits="objectBoundingBox">
+    <circle cx="0.5" cy="0.5" r="0.46" id="circle"/>
+   </clipPath>
+</svg>
+   <div class='serculos'></div>
+  <script src='js/main.bundle.js'>
+
+  </script>
+
+  <script>
+ 
+  </script>
+</body>
+
+</html>
