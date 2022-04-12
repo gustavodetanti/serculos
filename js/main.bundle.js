@@ -10,7 +10,7 @@
     apdiv2.style.width = `${SIZE}px`;
     apdiv2.style.height = `${SIZE}px`;
     apdiv2.style.transition = `transform ${T * 10}ms ease-in-out`;
-    let scale = rand();
+    let scale = rand() / 2 + 0.5;
     apdiv2.style.transform = `scale(${scale})`;
     let n = json2.length;
     let r = rand(n);
