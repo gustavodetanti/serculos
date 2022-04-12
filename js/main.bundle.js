@@ -1,6 +1,6 @@
 (() => {
   // src/components/Serculos.js
-  var T = 618;
+  var T = 1018;
   var ww = window.innerWidth;
   var wh = window.innerHeight;
   var SIZE = wh / 3 - 10;
@@ -8,6 +8,7 @@
     SIZE = ww / 3 - 10;
   }
   function Serculos(apdiv2, json) {
+    let sto, ended = false;
     apdiv2.style.width = `${SIZE}px`;
     apdiv2.style.height = `${SIZE}px`;
     apdiv2.style.transition = `transform ${T * 10}ms ease-in-out`;
@@ -20,6 +21,8 @@
     apdiv2.innerHTML = ``;
     showActual();
     function showActual() {
+      if (ended)
+        return;
       let aims = [...apdiv2.querySelectorAll("img")];
       aims.forEach((ai) => {
         ai.classList.add("toRemove");
@@ -29,6 +32,8 @@
       IMtop.style.width = `${SIZE}px`;
       IMtop.style.height = `${SIZE}px`;
       IMtop.onload = () => {
+        if (ended)
+          return;
         setTimeout(() => {
           IMtop.classList.remove("hidden");
           IMtop.style.transition = `opacity ${T / 1e3}s linear`;
@@ -44,6 +49,8 @@
       IMtop.src = json[r].src;
     }
     function next() {
+      if (ended)
+        return;
       [...apdiv2.querySelectorAll(".toRemove")].forEach((tr) => {
         tr.parentNode.removeChild(tr);
       });
@@ -65,6 +72,11 @@
     function add(n2) {
       return n2 + 1;
     }
+    function end() {
+      ended = true;
+      clearTimeout(sto);
+    }
+    return { end, div: apdiv2 };
   }
 
   // src/components/functions/Send.js
@@ -114,9 +126,12 @@
   // src/main.js
   var apdiv;
   var serculos;
+  var objs = [];
+  var W;
   window.addEventListener("DOMContentLoaded", (event) => {
     serculos = document.querySelector(".serculos");
     let ww2 = window.innerWidth;
+    W = ww2;
     let hh = window.innerHeight;
     if (ww2 < hh) {
       serculos.style.width = ww2 + "px";
@@ -127,6 +142,30 @@
     }
     init();
   });
+  window.addEventListener("resize", (event) => {
+    let ww2 = window.innerWidth;
+    let hh = window.innerHeight;
+    if (ww2 == W)
+      return;
+    W = ww2;
+    H = hh;
+    reiniciar();
+  });
+  function reiniciar() {
+    objs.forEach((o) => {
+      o.end();
+      serculos.removeChild(o.div);
+    });
+    objs = [];
+    if (W < H) {
+      serculos.style.width = W + "px";
+      serculos.style.margin = ` ${(H - W) / 2}px 0`;
+    } else {
+      serculos.style.width = H + "px";
+      serculos.style.margin = "0 auto";
+    }
+    init();
+  }
   function init() {
     for (let i = 0; i < 9; i++) {
       let el = document.createElement("div");
@@ -138,7 +177,7 @@
     Send("images.json", (json) => {
       console.log(json);
       apdiv.forEach(function(s) {
-        Serculos(s, json);
+        objs.push(Serculos(s, json));
       });
     });
   }
