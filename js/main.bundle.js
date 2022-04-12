@@ -1,7 +1,11 @@
 (() => {
   // src/components/Serculos.js
   var T = 618;
-  var SIZE = window.innerHeight / 3 - 10;
+  var [ww, wh] = [window.innerWidth, window.innerHeight];
+  var SIZE = wh / 3 - 10;
+  if (ww < wh) {
+    SIZE = ww / 3 - 10;
+  }
   function Serculos(apdiv2, json2) {
     apdiv2.style.width = `${SIZE}px`;
     apdiv2.style.height = `${SIZE}px`;
@@ -285,7 +289,7 @@
   var serculos;
   window.addEventListener("DOMContentLoaded", (event) => {
     serculos = document.querySelector(".serculos");
-    let ww = window.innerWidth;
+    let ww2 = window.innerWidth;
     let hh = window.innerHeight;
     serculos.style.width = hh + "px";
     serculos.style.margin = "0 auto";
