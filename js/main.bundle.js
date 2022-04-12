@@ -141,6 +141,7 @@
     let ww2 = window.innerWidth;
     W = ww2;
     let hh = window.innerHeight;
+    H = hh;
     if (ww2 < hh) {
       serculos.style.width = ww2 + "px";
       serculos.style.margin = ` ${(hh - ww2) / 2}px 0`;
